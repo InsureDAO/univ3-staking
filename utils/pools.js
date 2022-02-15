@@ -7,15 +7,15 @@ import { web3 } from '../utils/ethers'
 import univ3prices from '@thanpolas/univ3prices'
 
 // Find a matching incentive program.
-// export const findIncentiveProgram = async (address) => {
-//   const staking = new ethers.Contract(v3Staker.address, v3Staker.abi, web3)
-//   const incentives = await staking.filters.IncentiveCreated()
-//   const data = await staking.queryFilter(incentives, 13122700)
-//   const program = data.find(
-//     (item) => item.args.pool === '0x3432ef874A39BB3013e4d574017e0cCC6F937efD'
-//   )
-//   return program
-// }
+export const findIncentiveProgram = async (address) => {
+   const staking = new ethers.Contract(v3Staker.address, v3Staker.abi, web3)
+   const incentives = await staking.filters.IncentiveCreated()
+   const data = await staking.queryFilter(incentives, 13122700)
+   const program = data.find(
+     (item) => item.args.pool === '0x3432ef874A39BB3013e4d574017e0cCC6F937efD'
+   )
+   return program
+}
 
 // OLD CALL --- Approve and Transfer the NFT in
 export const depositNFT = async (tokenId, account) => {
@@ -297,13 +297,16 @@ export const findNFTByPool = async (address, program) => {
 
 // Fetches TVL of a XXX/ETH pool and returns prices
 export const getPoolData = async (pool, token) => {
-  const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+  const weth = '0xc778417e063141139fce010982780140aa0cd5ab' //change needed
 
   const wethPrice = await getWETHPrice()
+  
   const poolContract = new ethers.Contract(pool, v3Pool.abi, web3)
-
+  console.log("contract",poolContract, web3)
   const token0 = await poolContract.token0()
+  console.log("a",token0)
   const data = await poolContract.slot0()
+  console.log("b",data)
 
   const spacing = await poolContract.tickSpacing()
   const liquidity = await poolContract.liquidity()
@@ -337,8 +340,9 @@ export const getPoolData = async (pool, token) => {
 }
 
 export const getWETHPrice = async () => {
-  const weth_usdc = '0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640'
+  const weth_usdc = '0x641d133ccf9f3ad956912b558cd5b708fede8481'
   const poolContract = new ethers.Contract(weth_usdc, v3Pool.abi, web3)
+  
   const data = await poolContract.slot0()
   const ratio = univ3prices([6, 18], data.sqrtPriceX96).toAuto() // [] token decimals
   return ratio

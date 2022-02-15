@@ -37,13 +37,13 @@ import {
 
 import { comma } from '../utils/helpers'
 
-// RBN PROGRAM
+// RBN PROGRAM //CHANGE
 const IncentiveKey = [
-  '0x6123B0049F904d730dB3C36a31167D9d4121fA6B',
-  '0x94981F69F7483AF3ae218CbfE65233cC3c60d93a',
-  1633694400,
-  1638878400,
-  '0xDAEada3d210D2f45874724BeEa03C7d4BBD41674'
+  '0x485A417B7425E8347D19b05bf5D78B18F9732EAa',
+  '0x02f21d9Cf947929F8ee14c2A1c26a001Cc1718EA',
+  1644566400,
+  1644666400,
+  '0x168F8aA6d0aaeFCF75DdD3fF6793861114C035E8'
 ]
 
 const programEmissions = 10000000
@@ -313,6 +313,8 @@ export default function Home() {
                     <b>{`${pool.symbol ? pool.symbol : '???'} & ETH here`}</b>
                   </Link>
                   {` to get started`}{' '}
+                  <br/>
+                  {` Recommended Range: 0.9222 ~ aaaaa`}{' '}
                 </Text>
               </Center>
             )}

@@ -23,14 +23,15 @@ const theme = {
 }
 
 export default function App({ Component, pageProps }) {
+  console.log(chainID)
   return (
     <ChakraProvider theme={extendTheme({ theme })}>
       <CSSReset />
       <UseWalletProvider
         chainId={chainID}
         connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
-          walletlink: { url: 'https://mainnet.eth.aragon.network/' }
+          //walletconnect: { rpcUrl: 'https://rinkeby.eth.aragon.network/' },
+          walletlink: { url: 'https://rinkeby.eth.aragon.network/' }
         }}
       >
         <AlertProvider>
